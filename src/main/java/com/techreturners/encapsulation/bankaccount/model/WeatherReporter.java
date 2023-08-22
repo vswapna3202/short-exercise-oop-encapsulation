@@ -4,44 +4,62 @@ import java.text.MessageFormat;
 
 public class WeatherReporter {
 
-    public String location;
-    public double temperature;
+    /*  Changing access of public to private for encapsulation */
+    private String location;
+    private double temperature;
+    private static final String LONDON_CITY = "London";
+    private static final String CALIFORNIA_CITY = "California";
+    private static final String CAPE_TOWN_CITY = "Cape Town";
+    private static final int HIGH_TEMPERATURE_THRESHOLD = 30;
+    private static final int LOW_TEMPERATURE_THRESHOLD = 10;
+
 
     public WeatherReporter(String location, double temperature) {
         this.location = location;
         this.temperature = temperature;
     }
 
+    /* Added method to convertTemperatureToFahrenheit as separate method
+    rather than being part of print() method
+     */
+    public double convertTemperatureToFahrenheit(double temperature){
+        return (9.0 / 5.0) * temperature + 32;
+    }
+
     public String print() {
 
-        double newTemp = (9.0 / 5.0) * temperature + 32;
-        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, check1(), check2(), newTemp);
+        double newTemp = convertTemperatureToFahrenheit(temperature);
+        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, getWeatherEmoji(), getTemperatureFeedback(), newTemp);
 
     }
 
-    public String check1() {
-        if (location == "London") {
-
-            return "🌦";
-
-        } else if (location == "California") {
-
-            return "🌅";
-
-        } else if (location == "Cape Town") {
-
-            return "🌤";
-
+    /* This method checks the location and sends back a weather emoji depending
+       on location. Uses static city variables instead of hardcoded cities. Also
+       instead of if else, using switch case.
+     */
+    public String getWeatherEmoji() {
+        switch (location) {
+            case LONDON_CITY:
+                return "🌦";
+            case CALIFORNIA_CITY:
+                return "🌅";
+            case CAPE_TOWN_CITY:
+                return "🌤";
+            default:
+                return "🔆";
         }
-        return "🔆";
     }
 
-    public String check2() {
-        if (temperature > 30) {
+    /* This method getsTemperatureFeedback depending on temperature threshold if
+    temperature is high or low or not relevant messages are displayed. Uses static
+    variables instead of hardcoded values
+     */
+    public String getTemperatureFeedback() {
+        if (temperature > HIGH_TEMPERATURE_THRESHOLD) {
 
             return "It's too hot 🥵!";
 
-        } else if (temperature < 10) {
+        } else if (temperature < LOW_TEMPERATURE_THRESHOLD) {
 
             return "It's too cold 🥶!";
 
