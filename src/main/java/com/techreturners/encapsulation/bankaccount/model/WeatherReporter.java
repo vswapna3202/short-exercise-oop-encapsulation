@@ -1,5 +1,6 @@
 package com.techreturners.encapsulation.bankaccount.model;
 
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 
 public class WeatherReporter {
@@ -16,7 +17,10 @@ public class WeatherReporter {
     private static final String HOT_MESSAGE = "It's too hot 🥵!";
     private static final String COLD_MESSAGE = "It's too cold 🥶!";
     private static final String COMFORTABLE_MESSAGE = "Ahhh...it's just right 😊!";
-
+    private static final String RAIN_EMOJI = "🌦";
+    private static final String SWIM_EMOJI = "🌅";
+    private static final String CLOUDY_EMOJI = "🌤";
+    private static final String SUN_EMOJI = "🔆";
 
     public WeatherReporter(String location, double temperature) {
         this.location = location;
@@ -27,7 +31,7 @@ public class WeatherReporter {
     rather than being part of print() method
      */
     public double convertTemperatureToFahrenheit(double temperature){
-        return (9.0 / 5.0) * temperature + 32;
+        return roundToTwoDecimalPlaces((9.0 / 5.0) * temperature + 32);
     }
 
     public String print() {
@@ -49,13 +53,13 @@ public class WeatherReporter {
     public String getWeatherEmoji() {
         switch (location) {
             case LONDON_CITY:
-                return "🌦";
+                return RAIN_EMOJI;
             case CALIFORNIA_CITY:
-                return "🌅";
+                return SWIM_EMOJI;
             case CAPE_TOWN_CITY:
-                return "🌤";
+                return CLOUDY_EMOJI;
             default:
-                return "🔆";
+                return SUN_EMOJI;
         }
     }
 
@@ -65,15 +69,20 @@ public class WeatherReporter {
      */
     public String getTemperatureFeedback() {
         if (temperature > HIGH_TEMPERATURE_THRESHOLD) {
-
             return HOT_MESSAGE;
-
         } else if (temperature < LOW_TEMPERATURE_THRESHOLD) {
-
             return COLD_MESSAGE;
-
         }
         return COMFORTABLE_MESSAGE;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    private double roundToTwoDecimalPlaces(double temperature){
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(decimalFormat.format(temperature));
     }
 
 }
