@@ -22,7 +22,7 @@ public class WeatherReporterTest {
     private static final double FAHRENHEIT_WHEN_NEGATIVE_TEMPERATURE = 14;
     private static final String LONDON = "London";
     private static final String CALIFORNIA = "California";
-    private static final String CAPETOWN = "CapeTown";
+    private static final String CAPETOWN = "Cape Town";
     private static final String MUMBAI = "Mumbai";
     private static final String PRINT_MESSAGE_LONDON = "I am in London and it is "+RAIN_EMOJI+". "+COMFORTABLE_MESSAGE+
             ". The temperature in Fahrenheit is "+FAHRENHEIT_WHEN_POSITIVE_TEMPERATURE+".";
@@ -34,10 +34,10 @@ public class WeatherReporterTest {
 
     @BeforeAll
     public static void setUpBeforeAll(){
-        weatherReporterLondon = new WeatherReporter("London",26);
-        weatherReporterCalifornia = new WeatherReporter("California",28);
-        weatherReporterCapeTown = new WeatherReporter("Cape Town", 8);
-        weatherReporterMumbai = new WeatherReporter("Mumbai", 34);
+        weatherReporterLondon = new WeatherReporter(LONDON,26);
+        weatherReporterCalifornia = new WeatherReporter(CALIFORNIA,28);
+        weatherReporterCapeTown = new WeatherReporter(CAPETOWN, 8);
+        weatherReporterMumbai = new WeatherReporter(MUMBAI, 34);
     }
     @Test
     public void checkGetWeatherEmojiForLondon(){

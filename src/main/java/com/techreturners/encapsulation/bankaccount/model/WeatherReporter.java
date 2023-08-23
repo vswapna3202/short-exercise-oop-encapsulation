@@ -28,7 +28,8 @@ public class WeatherReporter {
     }
 
     /* Added method to convertTemperatureToFahrenheit as separate method
-    rather than being part of print() method
+    rather than being part of print() method and also round it to two decimal
+    places
      */
     public double convertTemperatureToFahrenheit(double temperature){
         return roundToTwoDecimalPlaces((9.0 / 5.0) * temperature + 32);
@@ -51,16 +52,12 @@ public class WeatherReporter {
        instead of if else, using switch case.
      */
     public String getWeatherEmoji() {
-        switch (location) {
-            case LONDON_CITY:
-                return RAIN_EMOJI;
-            case CALIFORNIA_CITY:
-                return SWIM_EMOJI;
-            case CAPE_TOWN_CITY:
-                return CLOUDY_EMOJI;
-            default:
-                return SUN_EMOJI;
-        }
+        return switch (location) {
+            case LONDON_CITY -> RAIN_EMOJI;
+            case CALIFORNIA_CITY -> SWIM_EMOJI;
+            case CAPE_TOWN_CITY -> CLOUDY_EMOJI;
+            default -> SUN_EMOJI;
+        };
     }
 
     /* This method getsTemperatureFeedback depending on temperature threshold if
@@ -80,6 +77,7 @@ public class WeatherReporter {
         return temperature;
     }
 
+    /* This method rounds the temperature to two decimal places */
     private double roundToTwoDecimalPlaces(double temperature){
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return Double.parseDouble(decimalFormat.format(temperature));
