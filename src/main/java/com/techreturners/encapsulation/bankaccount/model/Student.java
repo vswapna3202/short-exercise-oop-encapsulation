@@ -25,63 +25,39 @@ public class Student {
         return group;
     }
 
-    public boolean upgradeStudentGrade(){
-        switch(grade){
-            case B:
-                grade = Grade.A;
-                return true;
-            case C:
-                grade = Grade.B;
-                return true;
-            case D:
-                grade = Grade.C;
-                return true;
-            case E:
-                grade = Grade.D;
-                return true;
-            case F:
-                grade = Grade.E;
-                return true;
-            default:
-                return false;
+    public int upgradeStudentGrade(){
+        if (grade != Grade.A){
+            grade = Grade.values()[grade.ordinal() - 1];
+            return 1;
         }
+        return 0;
     }
 
-    public boolean downGradeStudentGrade(){
-        switch(grade){
-            case A:
-                grade = Grade.B;
-                return true;
-            case B:
-                grade = Grade.C;
-                return true;
-            case C:
-                grade = Grade.D;
-                return true;
-            case D:
-                grade = Grade.E;
-                return true;
-            case E:
-                grade = Grade.F;
-                return true;
-            default:
-                return false;
+    public int downgradeStudentGrade(){
+        if (grade != Grade.F){
+            grade = Grade.values()[grade.ordinal() + 1];
+            return -1;
         }
+        return 0;
     }
 
-    public String upgradePrint(){
+    public String getGradeChangePrint(String action){
         return "Student "+getName()+ " in "+ getGroup()+
-                " has upgraded grade of "+getGrade();
+                " has "+action+ " grade of "+getGrade();
+    }
+    public String upgradePrint(){
+        final String action = "upgraded";
+        return getGradeChangePrint(action);
     }
 
-    public String downGradePrint(){
-        return "Student "+getName()+" in "+ getGroup()+
-                " has downgraded grade of "+getGrade();
+    public String downgradePrint(){
+        final String action = "downgraded";
+        return getGradeChangePrint(action);
     }
 
     public String noGradingChangePrint(){
-        return "Student "+getName()+" in "+getGroup()+
-                " has no grade change";
+        final String action = "no change in";
+        return getGradeChangePrint(action);
     }
 
 }
