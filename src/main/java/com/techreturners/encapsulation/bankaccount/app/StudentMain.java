@@ -3,7 +3,6 @@ package com.techreturners.encapsulation.bankaccount.app;
 import com.techreturners.encapsulation.bankaccount.model.Grade;
 import com.techreturners.encapsulation.bankaccount.model.Group;
 import com.techreturners.encapsulation.bankaccount.model.School;
-import com.techreturners.encapsulation.bankaccount.model.Student;
 
 public class StudentMain {
 
@@ -17,7 +16,9 @@ public class StudentMain {
     private static final String SIXTH_STUDENT_NAME = "Vincent Crabbe";
     private static final String UPGRADE_STRING = "upgrade";
     public static void main(String[] args){
-
+        /* Create school class, pass student name, grade, group and whether
+        upgrade needs to happen or not.
+         */
         School school = new School();
         school.processStudentGrade(FIRST_STUDENT_NAME,
                 Grade.B,
